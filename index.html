@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Jharkhand Civic Watch</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root {
+      --public-green: #22c55e;
+      --critical-amber: #f59e0b;
+      --emergency-red: #dc2626;
+      --custom-blue: #1e40af;
+      --header-bg: #f4f7fa;
+      --custom-box-bg: #eaf6fb;
+      --map-light-blue: #a7d8f7;
+    }
+    .tile {
+      border-radius: 1.25rem;
+      box-shadow: 0 7px 18px rgba(0,0,0,.07);
+      backdrop-filter: blur(1px);
+      transition: .2s ease;
+      background: rgba(255,255,255,0.97);
+    }
+    .tile:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 30px rgba(0,0,0,.12);
+      background: #fffbe8;
+      color: #222;
+    }
+    .custom-issue-bg {
+      background-color: var(--custom-box-bg);
+    }
+    .map-bg {
+      position: absolute;
+      left: 0; top: 0; width: 100vw; height: 100vh; z-index: -1;
+      pointer-events: none;
+      background: url('image.jpg') center 170px no-repeat;
+      background-size: 70vw auto;
+      opacity: 0.14;
+      filter: drop-shadow(0 4px 10px var(--map-light-blue));
+    }
+    .header-shrink {
+      padding-top: .7rem;
+      padding-bottom: .7rem;
+      background: var(--header-bg);
+      box-shadow: 0 2px 16px rgba(67,125,192,0.09);
+    }
+    .header-logo {
+      width: 42px; height: 42px; border-radius: 999px; box-shadow:0 3px 9px rgba(0,64,255,0.09);
+      background: linear-gradient(135deg, #a7d8f7 0%, #eaf6fb 100%);
+      object-fit: cover; margin-right:12px;
+    }
+  </style>
+</head>
+<body class="bg-white text-gray-900 scroll-smooth relative">
+  <div class="map-bg"></div>
+
+  <!-- HEADER NAV -->
+  <header class="header-shrink flex items-center justify-between px-5 py-2 sticky top-0 z-30">
+    <div class="flex items-center gap-2">
+      <img src="https://www.shutterstock.com/image-vector/public-safety-line-vector-illustration-260nw-2610855497.jpg" alt="Logo" class="header-logo"/>
+      <span class="text-xl font-bold text-blue-800 tracking-tight drop-shadow-sm">JHARKHAND CIVIC WATCH</span>
+    </div>
+    <nav class="flex items-center gap-5 text-[0.95rem] font-medium text-blue-800">
+      <a href="#profile" class="hover:text-blue-600">Profile</a>
+      <a href="#settings" class="hover:text-blue-600">Settings</a>
+      <a href="#complaints" class="hover:text-blue-600">Your Complaints</a>
+      <a href="#notifications" class="hover:text-blue-600">Notifications</a>
+      <a href="#track" class="hover:text-blue-600">Track Complaints</a>
+      <a href="#registered" class="hover:text-blue-600">Complaints Around You</a>
+      <a href="#active" class="hover:text-blue-600">Active/Resolved</a>
+      <a href="#karma" class="hover:text-blue-600">Karma</a>
+    </nav>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section class="relative min-h-[60vh] flex items-center justify-center"
+    style="background-image: url('https://im.hunt.in/cg/jhar/About/Profile/SculpturesofJharkhand.jpg'); background-size: cover; background-position: center;">
+    <div class="absolute inset-0 bg-black/40"></div>
+    <div class="relative max-w-3xl mx-auto text-center text-white px-6 py-12">
+      <h1 class="text-5xl font-extrabold drop-shadow mb-4">JHARKHAND CIVIC WATCH</h1>
+      <p class="text-xl italic drop-shadow">Badhta Jharkhand, Badalta Jharkhand</p>
+    </div>
+  </section>
+
+  
+<!-- MAIN CATEGORY BUTTONS -->
+<section id="category-tiles" class="py-10 relative content-section">
+  <div class="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8 relative z-10">
+
+    <a href="#public-issues" class="tile bg-green-600 bg-[url('https://images.unsplash.com/photo-1506744038136-462ea0e4f98b?auto=format&fit=crop&w=600&q=80')] bg-cover bg-center bg-no-repeat flex flex-col items-center justify-center text-white text-md font-semibold shadow-lg cursor-pointer hover:brightness-110 transition" style="background: var(--public-green); color: #fff;">
+      <img src="https://img.icons8.com/windows/64/ffffff/conference.png" alt="Public Issue"/>
+      <span class="pt-2">Public Issue</span>
+    </a>
+
+    <a href="#critical-issues" class="tile bg-yellow-400 bg-[url('https://images.unsplash.com/photo-1504384308090-2eeb1f0ae11f?auto=format&fit=crop&w=600&q=80')] bg-cover bg-center bg-no-repeat flex flex-col items-center justify-center text-white text-md font-semibold shadow-lg cursor-pointer hover:brightness-110 transition" style="background: var(--critical-amber); color: #fff;">
+      <img src="https://img.icons8.com/windows/64/ffffff/factory.png" alt="Critical Issue"/>
+      <span class="pt-2">Critical Issue</span>
+    </a>
+
+    <a href="#emergency-issues" class="tile bg-red-600 bg-[url('https://images.unsplash.com/photo-1486308510493-cb93636c62cb?auto=format&fit=crop&w=600&q=80')] bg-cover bg-center bg-no-repeat flex flex-col items-center justify-center text-white text-md font-semibold shadow-lg cursor-pointer hover:brightness-110 transition" style="background: var(--emergency-red); color: #fff;">
+      <img src="https://img.icons8.com/windows/64/ffffff/ambulance.png" alt="Emergency Issue"/>
+      <span class="pt-2">Emergency Issue</span>
+    </a>
+
+    <a href="#custom-issues" class="tile bg-blue-700 flex flex-col items-center justify-center text-white text-md font-semibold shadow-lg cursor-pointer hover:bg-blue-800 transition py-8" style="background: var(--custom-blue); color: #fff;">
+      <img src="https://img.icons8.com/windows/64/ffffff/settings.png" alt="Custom Issue"/>
+      <span class="pt-2">Custom Issues</span>
+    </a>
+
+  </div>
+</section>
+
+  <!-- PUBLIC ISSUE SECTION -->
+  <section id="public-issues" class="py-14 px-4 bg-white relative">
+    <div class="max-w-5xl mx-auto">
+      <h2 class="text-2xl font-bold mb-7 text-green-600 text-center">Public/Community Issues</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <a href="/register?issue=power" class="tile flex flex-col items-center justify-center py-7 shadow cursor-pointer hover:bg-green-100">
+          <img src="https://img.icons8.com/ios-filled/54/22c55e/light-on--v4.png" alt="Power Issue" />
+          <span class="mt-2 text-green-700 font-semibold">Power Issue</span>
+        </a>
+        <a href="/register?issue=education" class="tile flex flex-col items-center justify-center py-7 shadow cursor-pointer hover:bg-green-100">
+          <img src="https://img.icons8.com/ios-filled/54/22c55e/graduation-cap.png" alt="Education" />
+          <span class="mt-2 text-green-700 font-semibold">Education/Skill</span>
+        </a>
+        <a href="/register?issue=awareness" class="tile flex flex-col items-center justify-center py-7 shadow cursor-pointer hover:bg-green-100">
+          <img src="https://img.icons8.com/ios-filled/54/22c55e/megaphone.png" alt="Climate Awareness" />
+          <span class="mt-2 text-green-700 font-semibold">Climate Awareness</span>
+        </a>
+        <a href="/register?issue=transport" class="tile flex flex-col items-center justify-center py-7 shadow cursor-pointer hover:bg-green-100">
+          <img src="https://img.icons8.com/ios-filled/54/22c55e/bus.png" alt="Transport" />
+          <span class="mt-2 text-green-700 font-semibold">Transport</span>
+        </a>
+        <a href="/register?issue=digital" class="tile flex flex-col items-center justify-center py-7 shadow cursor-pointer hover:bg-green-100">
+          <img src="https://img.icons8.com/ios-filled/54/22c55e/wifi.png" alt="Digital Divide" />
+          <span class="mt-2 text-green-700 font-semibold">Digital Divide</span>
+        </a>
+        <a href="/register?issue=livelihood" class="tile flex flex-col items-center justify-center py-7 shadow cursor-pointer hover:bg-green-100">
+          <img src="https://img.icons8.com/ios-filled/54/22c55e/worker-male.png" alt="Livelihood Shift" />
+          <span class="mt-2 text-green-700 font-semibold">Livelihood Shift</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CRITICAL ISSUE SECTION -->
+  <section id="critical-issues" class="py-14 px-4 bg-yellow-50">
+    <h2 class="text-3xl font-bold mb-7 text-yellow-700 text-center">Critical Issues</h2>
+    <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+      <a href="/register?issue=chemical" class="tile flex flex-col items-center justify-center py-7 bg-white shadow cursor-pointer hover:bg-yellow-100">
+        <img src="https://img.icons8.com/ios/48/f5a623/chemical-plant.png" alt="Chemical Hazard" />
+        <span class="mt-2 text-yellow-700 font-semibold">Chemical Hazard</span>
+      </a>
+      <a href="/register?issue=water" class="tile flex flex-col items-center justify-center py-7 bg-white shadow cursor-pointer hover:bg-yellow-100">
+        <img src="https://img.icons8.com/ios/48/64b5f6/water.png" alt="Water Crisis" />
+        <span class="mt-2 text-yellow-700 font-semibold">Water Crisis</span>
+      </a>
+      <a href="/register?issue=deforestation" class="tile flex flex-col items-center justify-center py-7 bg-white shadow cursor-pointer hover:bg-yellow-100">
+        <img src="https://img.icons8.com/ios/48/795548/deciduous-tree.png" alt="Deforestation" />
+        <span class="mt-2 text-yellow-700 font-semibold">Deforestation</span>
+      </a>
+<a href="/register?issue=pollution" class="tile flex flex-col items-center justify-center py-7 bg-white shadow cursor-pointer hover:bg-yellow-100">
+  <img src="https://img.icons8.com/?size=100&id=NqpL4xz53xVh&format=png&color=FAB005" alt="Air Pollution" class="w-12 h-12" />
+  <span class="mt-2 text-yellow-700 font-semibold">Air Pollution</span>
+</a>
+      <a href="/register?issue=unemployment" class="tile flex flex-col items-center justify-center py-7 bg-white shadow cursor-pointer hover:bg-yellow-100">
+        <img src="https://img.icons8.com/ios/48/f5a623/businessman.png" alt="Unemployment" />
+        <span class="mt-2 text-yellow-700 font-semibold">Unemployment</span>
+      </a>
+<a href="/register?issue=mining" class="tile flex flex-col items-center justify-center py-7 bg-white shadow cursor-pointer hover:bg-yellow-100">
+  <img src="https://img.icons8.com/?size=100&id=xB1kIseCynri&format=png&color=FAB005" alt="Illegal Mining" class="w-12 h-12" />
+  <span class="mt-2 text-yellow-700 font-semibold">Illegal Mining</span>
+</a>
+    </div>
+  </section>
+
+  <!-- EMERGENCY ISSUE SECTION -->
+  <section id="emergency-issues" class="py-14 px-4 bg-red-50">
+    <h2 class="text-3xl font-bold mb-7 text-red-700 text-center">Emergency/SOS</h2>
+    <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+      <a href="/register?issue=road" class="tile flex flex-col items-center justify-center py-7 bg-white shadow cursor-pointer hover:bg-red-100">
+        <img src="https://img.icons8.com/ios/48/dc2626/car.png" alt="Road Accident" />
+        <span class="mt-2 text-red-700 font-semibold">Road Accident</span>
+      </a>
+      <a href="/register?issue=flood" class="tile flex flex-col items-center justify-center py-7 bg-white shadow cursor-pointer hover:bg-red-100">
+        <img src="https://img.icons8.com/ios/48/dc2626/rain.png" alt="Flood" />
+        <span class="mt-2 text-red-700 font-semibold">Flash Floods</span>
+      </a>
+<a href="/register?issue=minecollapse" class="tile flex flex-col items-center justify-center py-7 bg-white shadow cursor-pointer hover:bg-red-100">
+  <img src="https://img.icons8.com/?size=100&id=5Fct1XkGhLqF&format=png&color=FA5252" alt="Mine Collapse" class="w-12 h-12" />
+  <span class="mt-2 text-red-700 font-semibold">Mine Collapse</span>
+</a>
+
+      <a href="/register?issue=cropfailure" class="tile flex flex-col items-center justify-center py-7 bg-white shadow cursor-pointer hover:bg-red-100">
+        <img src="https://img.icons8.com/ios/48/dc2626/wheat.png" alt="Crop Failure" />
+        <span class="mt-2 text-red-700 font-semibold">Crop Failure</span>
+      </a>
+<a href="/register?issue=poweroutage" class="tile flex flex-col items-center justify-center py-7 bg-white shadow cursor-pointer hover:bg-red-100">
+  <img src="https://img.icons8.com/?size=100&id=25002&format=png&color=FA5252" alt="Power Outage" class="w-12 h-12" />
+  <span class="mt-2 text-red-700 font-semibold">Power Outage</span>
+</a>
+
+<a href="/register?issue=violence" class="tile flex flex-col items-center justify-center py-7 bg-white shadow cursor-pointer hover:bg-red-100">
+  <img src="https://img.icons8.com/?size=100&id=19740&format=png&color=FA5252" alt="Land Violence" class="w-12 h-12" />
+  <span class="mt-2 text-red-700 font-semibold">Land Violence</span>
+</a>
+    </div>
+  </section>
+
+  <!-- CUSTOM ISSUES SECTION -->
+  <section id="custom-issue" class="py-14 px-4 custom-issue-bg flex flex-col items-center relative">
+    <h2 class="text-2xl font-bold mb-7 text-[#1e40af] flex items-center">
+      <img src="https://img.icons8.com/ios-filled/42/1e40af/group-background-selected.png" alt="Custom Issues" class="mr-2"/>
+      Custom Issues
+    </h2>
+    <form class="max-w-2xl w-full bg-white rounded-2xl p-6 shadow border border-blue-100">
+      <label class="block mb-3 font-medium text-blue-800" for="custom-desc">Describe your problem</label>
+      <textarea id="custom-desc" rows="4" placeholder="Type your issue here..." class="border w-full p-3 rounded mb-3"></textarea>
+      <label class="block mb-3 font-medium text-blue-800" for="custom-upload">Upload image/video</label>
+      <input type="file" id="custom-upload" class="mb-3" />
+      <label class="block mb-3 font-medium text-blue-800" for="custom-suggestion">Suggested actions</label>
+      <textarea id="custom-suggestion" rows="3" class="border w-full p-3 rounded mb-3 bg-blue-50" placeholder="Suggestions will appear here..." readonly></textarea>
+      <button type="submit" class="mt-4 px-5 py-2 bg-[#1e40af] text-white font-semibold rounded hover:bg-blue-800">Submit</button>
+    </form>
+  </section>
+
+  <footer class="py-7 text-center text-sm text-gray-500 border-t">
+    2025 Jharkhand Civic Watch &mdash; Prototype
+  </footer>
+</body>
+</html>
